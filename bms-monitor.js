@@ -10,7 +10,13 @@ let language = '';
 const batteryIsOk = (temperature, soc, chargeRate, lang) => {
   language = lang;
   let langIsEligible = languageIsEligible(lang);
-  if(langIsEligible){
+    return getBatteryState(langIsEligible)
+ };
+ 
+ getBatteryState(langIsEligible)
+ {
+
+ if(langIsEligible){
     const tempResult = temperatureIsOK(temperature);
     const socResult = socIsOK(soc);
     const chargeResult = chargeRateIsOK(chargeRate);
@@ -18,7 +24,7 @@ const batteryIsOk = (temperature, soc, chargeRate, lang) => {
   }
   else
     return false;
- };
+}
 
 function languageIsEligible(lang) {
     return config.LANGUAGES_SUPPORTED.includes(lang.toUpperCase())
