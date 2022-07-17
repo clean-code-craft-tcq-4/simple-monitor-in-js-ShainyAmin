@@ -10,10 +10,10 @@ let language = '';
 const batteryIsOk = (temperature, soc, chargeRate, lang) => {
   language = lang;
   let langIsEligible = languageIsEligible(lang);
-    return getBatteryState(langIsEligible)
+    return getBatteryState(langIsEligible,temperature, soc, chargeRate,)
  };
  
- getBatteryState(langIsEligible)
+ function getBatteryState(langIsEligible,temperature, soc, chargeRate,)
  {
 
  if(langIsEligible){
