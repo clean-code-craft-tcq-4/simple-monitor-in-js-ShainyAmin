@@ -13,15 +13,21 @@ const batteryIsOk = (temperature, soc, chargeRate, lang) => {
     return getBatteryState(langIsEligible,temperature, soc, chargeRate,)
  };
  
- function getBatteryState(langIsEligible,temperature, soc, chargeRate,)
+ function getBatteryState(langIsEligible,temperature, soc, chargeRate)
  {
 
  if(langIsEligible){
   
-    return temperatureIsOK(temperature) && socIsOK(soc) && chargeRateIsOK(chargeRate);
+   return bateryState(temperature, soc, chargeRate)
   }
   else
     return false;
+}
+
+function bateryState(temperature, soc, chargeRate) {
+
+    return temperatureIsOK(temperature) && socIsOK(soc) && chargeRateIsOK(chargeRate);
+
 }
 
 function languageIsEligible(lang) {
