@@ -17,10 +17,8 @@ const batteryIsOk = (temperature, soc, chargeRate, lang) => {
  {
 
  if(langIsEligible){
-    const tempResult = temperatureIsOK(temperature);
-    const socResult = socIsOK(soc);
-    const chargeResult = chargeRateIsOK(chargeRate);
-    return tempResult && socResult && chargeResult;
+  
+    return temperatureIsOK(temperature) && socIsOK(soc) && chargeRateIsOK(chargeRate);
   }
   else
     return false;
