@@ -1,18 +1,72 @@
 const {expect} = require('chai');
+const config = require('./bmsConfiguration.json');
 
-function batteryIsOk(temperature, soc, charge_rate) {
-    if (temperature < 0 || temperature > 45) {
-        console.log('Temperature is out of range!');
-        return false;
-    } else if (soc < 20 || soc > 80) {
-        console.log('State of Charge is out of range!')
-        return false;
-    } else if (charge_rate > 0.8) {
-        console.log('Charge rate is out of range!');
-        return false;
-    }
-    return true;
+function calculateWarningTolerance(maxLimit) {
+   return maxLimit * config.WARNING_TOLERANCE_PERCENT; 
 }
 
-expect(batteryIsOk(25, 70, 0.7)).to.be.true;
-expect(batteryIsOk(50, 85, 0)).to.be.false;
+let language = '';
+
+const batteryIsOk = (temperature, soc, chargeRate, lang) => {
+  language = lang;
+  let langIsEligible = languageIsEligible(lang);
+    return getBatteryState(langIsEligible,temperature, soc, chargeRate,)
+ };
+ 
+ function getBatteryState(langIsEligible,temperature, soc, chargeRate)
+ {
+
+ if(langIsEligible){
+  
+   return bateryState(temperature, soc, chargeRate)
+  }
+  else
+    return false;
+}
+
+function bateryState(temperature, soc, chargeRate) {
+
+    return temperatureIsOK(temperature) && socIsOK(soc) && chargeRateIsOK(chargeRate);
+
+}
+
+function languageIsEligible(lang) {
+    return config.LANGUAGES_SUPPORTED.includes(lang.toUpperCase())
+}
+
+const temperatureIsOK = (temperature) => {
+    return checkBatteryState(temperature, config.MIN_TEMP, config.MAX_TEMP, 'TEMP');
+  };
+  
+  const socIsOK = (soc) => {
+    return checkBatteryState(soc, config.MIN_SOC, config.MAX_SOC, 'SOC');
+  };
+  
+  const chargeRateIsOK = (chargeRate) => {
+    return checkBatteryState(chargeRate, config.MIN_CHARGE_RATE, config.MAX_CHARGE_RATE, 'CHARGE_OUT');
+  };
+
+  const checkBatteryState = (batteryFactorValue, minLimit, maxLimit, bmsFactor) => {
+    checkWarningLevel(minLimit, maxLimit, batteryFactorValue, bmsFactor);
+    if (batteryFactorValue >= maxLimit || batteryFactorValue <= minLimit) {
+          printStatement(bmsFactor,  "OUT_OF_RANGE");
+      return false;
+    }
+    return true;
+  };
+
+  const printStatement = (statement, msg) => {
+    var lang = language.toUpperCase();
+    var msgCode = config[lang][statement] + " "+ config[lang][msg];
+    console.log(msgCode);
+  };
+  
+  const checkWarningLevel = (lowerLimit, upperLimit, value, statement) => {
+    const WarningLimit = calculateWarningTolerance(upperLimit);
+   
+
+   
+  };
+
+ 
+  module.exports = { batteryIsOk}

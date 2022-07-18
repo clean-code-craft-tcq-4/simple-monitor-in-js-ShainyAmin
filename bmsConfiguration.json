@@ -1,0 +1,36 @@
+{
+  "MIN_TEMP":0,
+  "MAX_TEMP":45,
+  "MIN_SOC": 20,
+  "MAX_SOC": 80,
+  "MIN_CHARGE_RATE" : 0,
+  "MAX_CHARGE_RATE" : 0.8,
+  "LANGUAGES_SUPPORTED" : ["ENGLISH", "GERMAN"],
+  "WARNING_TOLERANCE_PERCENT" : 0.05,
+  "ENGLISH" : {
+    "TEMP": "Temperature",
+    "SOC": "SOC",
+    "CHARGE_OUT" : "Charge Rate",
+    "OUT_OF_RANGE":" is out of range!",
+    "LOW_BREACH" :"LOW_BREACH",
+    "LOW_WARNING" :"LOW_WARNING",
+    "NORMAL":"NORMAL",
+    "HIGH_WARNING": "HIGH_WARNING",
+    "HIGH_BREACH":"HIGH_BREACH"
+   
+  },
+  "GERMAN" : {
+    "TEMP": "Temperatur",
+    "SOC": "SOC",
+    "CHARGE_OUT" : "Laderate",
+    "OUT_OF_RANGE":" ist außer Reichweite!",
+    "LOW_BREACH" :"NIEDRIGER VERLUST",
+    "LOW_WARNING" :"NIEDRIGE WARNUNG",
+    "NORMAL":"NORMAL",
+    "HIGH_WARNING": "HIGH WARNUNG",
+    "HIGH_BREACH":"HOHES BRECHEN"
+  }
+
+
+}
+  
