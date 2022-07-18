@@ -64,30 +64,52 @@ const temperatureIsOK = (temperature) => {
   const checkWarningLevel = (lowerLimit, upperLimit, value, statement) => {
     const WarningLimit = calculateWarningTolerance(upperLimit);
     let lowerHighLimit = lowerLimit + WarningLimit;
-    let upperLowLimit = upperLimit - WarningLimit
-    if (lowerLimit > value) {
-        printStatement(statement, "LOW_BREACH" );
-      
-    }
-    if (lowerLimit <= value &&  lowerHighLimit >= value) {
-        printStatement(statement, "LOW_WARNING" );
-     
-    }
-    if (
-        lowerHighLimit <= value &&
-        upperLowLimit  >= value
-    ) {
-        printStatement(statement, "NORMAL" );
-      
-    }
-    if (upperLowLimit <= value && value >= upperLimit) {
-        printStatement(statement, "HIGH_WARNING" );
-     
-    }
-    if (upperLimit > value) {
-        printStatement(statement, "HIGH_BREACH" );
+    let upperLowLimit = upperLimit - WarningLimit;
+
+    switch (true) {
+        case (lowerLimit > value):
+            printStatement(statement, "LOW_BREACH" );
+            break;
+        case (lowerLimit <= value &&  lowerHighLimit >= value):
+            printStatement(statement, "LOW_WARNING" );
+            break;
+        case (lowerHighLimit <= value && upperLowLimit  >= value):
+            printStatement(statement, "NORMAL" );
+            break;
+        case (upperLowLimit <= value && value >= upperLimit):
+            printStatement(statement, "HIGH_WARNING" );
+            break;
+        case (upperLimit > value):
+            printStatement(statement, "HIGH_BREACH" );
+            break;
     
+        default:
+            break;
     }
+
+    // if (lowerLimit > value) {
+    //     printStatement(statement, "LOW_BREACH" );
+      
+    // }
+    // if (lowerLimit <= value &&  lowerHighLimit >= value) {
+    //     printStatement(statement, "LOW_WARNING" );
+     
+    // }
+    // if (
+    //     lowerHighLimit <= value &&
+    //     upperLowLimit  >= value
+    // ) {
+    //     printStatement(statement, "NORMAL" );
+      
+    // }
+    // if (upperLowLimit <= value && value >= upperLimit) {
+    //     printStatement(statement, "HIGH_WARNING" );
+     
+    // }
+    // if (upperLimit > value) {
+    //     printStatement(statement, "HIGH_BREACH" );
+    
+    // }
   };
 
 
