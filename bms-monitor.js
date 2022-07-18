@@ -66,26 +66,7 @@ const temperatureIsOK = (temperature) => {
     let lowerHighLimit = lowerLimit + WarningLimit;
     let upperLowLimit = upperLimit - WarningLimit;
 
-    switch (true) {
-        case (lowerLimit > value):
-            printStatement(statement, "LOW_BREACH" );
-            break;
-        case (lowerLimit <= value &&  lowerHighLimit >= value):
-            printStatement(statement, "LOW_WARNING" );
-            break;
-        case (lowerHighLimit <= value && upperLowLimit  >= value):
-            printStatement(statement, "NORMAL" );
-            break;
-        case (upperLowLimit <= value && value >= upperLimit):
-            printStatement(statement, "HIGH_WARNING" );
-            break;
-        case (upperLimit > value):
-            printStatement(statement, "HIGH_BREACH" );
-            break;
-    
-        default:
-            break;
-    }
+    checkLimits(value, lowerLimit, lowerHighLimit, upperLowLimit, upperLimit, statement);
 
     // if (lowerLimit > value) {
     //     printStatement(statement, "LOW_BREACH" );
@@ -112,6 +93,28 @@ const temperatureIsOK = (temperature) => {
     // }
   };
 
+  function  checkLimits(value, lowerLimit, lowerHighLimit, upperLowLimit, upperLimit, statement) {
+    switch (true) {
+        case (lowerLimit > value):
+            printStatement(statement, "LOW_BREACH" );
+            break;
+        case (lowerLimit <= value &&  lowerHighLimit >= value):
+            printStatement(statement, "LOW_WARNING" );
+            break;
+        case (lowerHighLimit <= value && upperLowLimit  >= value):
+            printStatement(statement, "NORMAL" );
+            break;
+        case (upperLowLimit <= value && value >= upperLimit):
+            printStatement(statement, "HIGH_WARNING" );
+            break;
+        case (upperLimit > value):
+            printStatement(statement, "HIGH_BREACH" );
+            break;
+    
+        default:
+            break;
+    }
+  }
 
 
   module.exports = { batteryIsOk}
