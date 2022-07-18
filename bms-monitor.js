@@ -63,23 +63,24 @@ const temperatureIsOK = (temperature) => {
   
   const checkWarningLevel = (lowerLimit, upperLimit, value, statement) => {
     const WarningLimit = calculateWarningTolerance(upperLimit);
-  
+    let lowerHighLimit = lowerLimit + WarningLimit;
+    let upperLowLimit = upperLimit - WarningLimit
     if (lowerLimit > value) {
         printStatement(statement, "LOW_BREACH" );
       
     }
-    if (lowerLimit <= value && lowerLimit + WarningLimit >= value) {
+    if (lowerLimit <= value &&  lowerHighLimit >= value) {
         printStatement(statement, "LOW_WARNING" );
      
     }
     if (
-      lowerLimit + WarningLimit <= value &&
-      upperLimit - WarningLimit >= value
+        lowerHighLimit <= value &&
+        upperLowLimit  >= value
     ) {
         printStatement(statement, "NORMAL" );
       
     }
-    if (upperLimit - WarningLimit <= value && value >= upperLimit) {
+    if (upperLowLimit <= value && value >= upperLimit) {
         printStatement(statement, "HIGH_WARNING" );
      
     }
@@ -88,5 +89,7 @@ const temperatureIsOK = (temperature) => {
     
     }
   };
+
+
 
   module.exports = { batteryIsOk}
